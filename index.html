@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>CODEFY — Sites profissionais para o seu negócio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --gray-100: #F3F5F8;
+      --gray-200: #E4E8EF;
+      --navy: #0B1B3A;
+      --navy-2: #122A57;
+      --blue: #2E6CF6;
+      --blue-dim: rgba(46, 108, 246, .12);
+      --ink: #121826;
+      --ink-soft: #5B6475;
+      --white: #FFFFFF;
+      --card-bg: #FFFFFF;
+      --header-bg: rgba(243, 245, 248, .85);
+      --heading: #0B1B3A;
+      color-scheme: light;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --gray-100: #0B0F17;
+        --gray-200: #232B3B;
+        --ink: #E7EAF0;
+        --ink-soft: #9AA8BF;
+        --card-bg: #121826;
+        --header-bg: rgba(11, 15, 23, .85);
+        --heading: #F3F5F8;
+        color-scheme: dark;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --gray-100: #0B0F17;
+      --gray-200: #232B3B;
+      --ink: #E7EAF0;
+      --ink-soft: #9AA8BF;
+      --card-bg: #121826;
+      --header-bg: rgba(11, 15, 23, .85);
+      --heading: #F3F5F8;
+      color-scheme: dark;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--ink);
+      background: var(--gray-100);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--heading);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 96px 0;
+    }
+
+    .section-head {
+      max-width: 640px;
+      margin: 0 0 56px;
+    }
+
+    .section-head p.eyebrow {
+      color: var(--blue);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(28px, 4vw, 40px);
+      margin-bottom: 14px;
+    }
+
+    .section-head .lead {
+      color: var(--ink-soft);
+      font-size: 17px;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      border: 2px solid transparent;
+      transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 10px 24px -10px rgba(46, 108, 246, .6);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px -10px rgba(46, 108, 246, .7);
+    }
+
+    .btn-ghost {
+      border-color: var(--gray-200);
+      color: var(--heading);
+      background: var(--card-bg);
+    }
+
+    .theme-toggle {
+      border: 2px solid var(--gray-200);
+      color: var(--heading);
+      background: var(--card-bg);
+      border-radius: 10px;
+      width: 42px;
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--blue);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+
+    .btn-light {
+      border-color: rgba(255, 255, 255, .35);
+      color: #fff;
+    }
+
+    .btn-light:hover {
+      background: rgba(255, 255, 255, .12);
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: var(--header-bg);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 24px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--navy);
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .nav-links a {
+      color: var(--ink-soft);
+      transition: color .2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--navy);
+    }
+
+    .nav-cta {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .burger span {
+      width: 24px;
+      height: 2px;
+      background: var(--navy);
+    }
+
+    #mobileMenu {
+      display: none;
+      flex-direction: column;
+      gap: 18px;
+      padding: 20px 24px 28px;
+      background: var(--gray-100);
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    #mobileMenu.open {
+      display: flex;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 170px 0 110px;
+      background: var(--navy);
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 620px;
+      height: 620px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, rgba(46, 108, 246, .35), transparent 70%);
+      top: -220px;
+      right: -180px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 56px;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 54px);
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .hero p.sub {
+      color: #C6D1EC;
+      font-size: 18px;
+      max-width: 520px;
+      margin-bottom: 34px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-visual {
+      position: relative;
+      background: linear-gradient(160deg, var(--navy-2), #0A1733);
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .5);
+    }
+
+    .hero-visual .dots {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 18px;
+    }
+
+    .hero-visual .dots span {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .25);
+    }
+
+    .code-line {
+      font-family: monospace;
+      font-size: 13.5px;
+      color: #9FB4E8;
+      white-space: pre;
+      margin-bottom: 6px;
+    }
+
+    .code-line b {
+      color: #6FA0FF;
+    }
+
+    .code-line i {
+      color: #7CE0B0;
+      font-style: normal;
+    }
+
+    /* Services */
+    .cards3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--card-bg);
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 30px;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px -20px rgba(11, 27, 58, .25);
+      border-color: var(--blue);
+    }
+
+    .icon-box {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: var(--blue-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .service-card h3 {
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      color: var(--ink-soft);
+      font-size: 15px;
+    }
+
+    /* Portfolio */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .pf-card {
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid var(--gray-200);
+    }
+
+    .pf-thumb {
+      height: 170px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 600;
+      font-size: 17px;
+      position: relative;
+    }
+
+    .pf-body {
+      padding: 20px;
+    }
+
+    .pf-body h4 {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .pf-body p {
+      color: var(--ink-soft);
+      font-size: 13.5px;
+      margin-bottom: 16px;
+    }
+
+    .pf-link {
+      font-weight: 600;
+      color: var(--blue);
+      font-size: 14px;
+    }
+
+    /* Advantages */
+    .adv-section {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 28px;
+      margin: 0 24px;
+      padding: 80px 56px;
+    }
+
+    .adv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+      margin-top: 40px;
+    }
+
+    .adv-item {
+      display: flex;
+      gap: 16px;
+    }
+
+    .adv-item .num {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .adv-item h4 {
+      color: #fff;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .adv-item p {
+      color: #AEBCDB;
+      font-size: 14px;
+    }
+
+    /* Pricing */
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .plan {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 18px;
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .plan.featured {
+      border-color: var(--blue);
+      box-shadow: 0 24px 44px -20px rgba(46, 108, 246, .35);
+      position: relative;
+    }
+
+    .plan.featured .tag {
+      position: absolute;
+      top: -13px;
+      right: 28px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    .plan h3 {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .plan .price {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 34px;
+      color: var(--navy);
+      margin: 14px 0;
+    }
+
+    .plan .price span {
+      font-size: 14px;
+      color: var(--ink-soft);
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .plan ul {
+      list-style: none;
+      margin: 20px 0 28px;
+      flex: 1;
+    }
+
+    .plan li {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      padding: 8px 0;
+      border-top: 1px solid var(--gray-200);
+    }
+
+    .plan li:first-child {
+      border-top: none;
+    }
+
+    .plan li::before {
+      content: "✓ ";
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    /* Testimonials */
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testi {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 28px;
+    }
+
+    .stars {
+      color: #F5A524;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+      font-size: 15px;
+    }
+
+    .testi p.quote {
+      font-size: 14.5px;
+      color: var(--ink);
+      margin-bottom: 18px;
+    }
+
+    .testi .who {
+      font-size: 13.5px;
+      color: var(--ink-soft);
+      font-weight: 600;
+    }
+
+    .testi .demo-tag {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 11.5px;
+      color: var(--ink-soft);
+      background: var(--gray-100);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    /* CTA */
+    .cta-final {
+      background: linear-gradient(135deg, var(--navy), #163A7A);
+      color: #fff;
+      border-radius: 28px;
+      margin: 0 24px;
+      padding: 80px 40px;
+      text-align: center;
+    }
+
+    .cta-final h2 {
+      color: #fff;
+      font-size: clamp(26px, 4vw, 36px);
+      margin-bottom: 14px;
+    }
+
+    .cta-final p {
+      color: #C6D1EC;
+      margin-bottom: 30px;
+      font-size: 16px;
+    }
+
+    /* Footer */
+    footer {
+      background: #081429;
+      color: #AEBCDB;
+      padding: 64px 0 28px;
+    }
+
+    .foot-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+
+    .foot-grid h5 {
+      color: #fff;
+      font-size: 14.5px;
+      margin-bottom: 16px;
+    }
+
+    .foot-grid ul {
+      list-style: none;
+    }
+
+    .foot-grid li {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .foot-grid a:hover {
+      color: #fff;
+    }
+
+    .foot-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+
+    .foot-logo span {
+      color: var(--blue);
+    }
+
+    .foot-bottom {
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .wa-float {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 60;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 12px 28px -8px rgba(0, 0, 0, .4);
+      transition: transform .25s ease;
+    }
+
+    .wa-float:hover {
+      transform: scale(1.08);
+    }
+
+    .wa-float svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media(max-width:860px) {
+
+      .nav-links,
+      .nav-cta .btn-ghost {
+        display: none;
+      }
+
+      .burger {
+        display: flex;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cards3,
+      .portfolio-grid,
+      .adv-grid,
+      .plans,
+      .testi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .adv-section,
+      .cta-final {
+        margin: 0 16px;
+        padding: 56px 24px;
+      }
+
+      .foot-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      section {
+        padding: 72px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <nav class="nav">
+      <a href="#inicio" class="logo">CODE<span>FY</span></a>
+      <div class="nav-links">
+        <a href="#servicos">Serviços</a>
+      </div>
+      <div class="nav-cta">
+        <button class="theme-toggle" id="themeToggle" aria-label="Alternar modo claro/escuro">🌙</button>
+        <a href="https://wa.me/557996086177?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20sites%20da%20CODEFY."
+          target="_blank" rel="noopener" class="btn btn-ghost">Solicitar orçamento</a>
+        <button class="burger" id="burgerBtn" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+    <div id="mobileMenu">
+      <a href="#servicos">Serviços</a>
+      <button class="theme-toggle" id="themeToggleMobile" aria-label="Alternar modo claro/escuro"
+        style="align-self:flex-start;">🌙</button>
+      <a href="https://wa.me/557996086177?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20sites%20da%20CODEFY."
+        target="_blank" rel="noopener" class="btn btn-primary">Solicitar orçamento</a>
+    </div>
+  </header>
+
+  <section class="hero" id="inicio">
+    <div class="wrap hero-grid">
+      <div>
+        <h1>Seu negócio merece estar na internet.</h1>
+        <p class="sub">Criamos sites profissionais que valorizam sua marca, atraem clientes e ajudam seu negócio a
+          crescer.</p>
+        <div class="hero-actions">
+          <a href="https://wa.me/557996086177?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20sites%20da%20CODEFY."
+            target="_blank" rel="noopener" class="btn btn-primary">Solicitar orçamento</a>
+          <a href="#orcamento" class="btn btn-light" style="border:2px solid rgba(255,255,255,.35)">Falar com a
+            gente</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="dots"><span></span><span></span><span></span></div>
+        <div class="code-line">&lt;<b>section</b> class=<i>"hero"</i>&gt;</div>
+        <div class="code-line">&nbsp;&nbsp;&lt;<b>h1</b>&gt;Sua marca online&lt;/<b>h1</b>&gt;</div>
+        <div class="code-line">&nbsp;&nbsp;&lt;<b>Button</b> cta=<i>"orcamento"</i> /&gt;</div>
+        <div class="code-line">&lt;/<b>section</b>&gt;</div>
+        <div class="code-line" style="margin-top:14px; color:#7CE0B0;">✓ build concluído em 2.4s</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Serviços</p>
+        <h2>O que desenvolvemos para você</h2>
+        <p class="lead">Soluções sob medida para cada tipo de negócio, do primeiro contato até a entrega final.</p>
+      </div>
+      <div class="cards3">
+        <div class="service-card reveal">
+          <div class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E6CF6"
+              stroke-width="2">
+              <path d="M3 9h18M9 21V9" />
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+            </svg></div>
+          <h3>Sites institucionais</h3>
+          <p>Apresente sua empresa com credibilidade, contando sua história e reforçando sua identidade de marca.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E6CF6"
+              stroke-width="2">
+              <path d="M13 2 3 14h8l-1 8 10-12h-8z" />
+            </svg></div>
+          <h3>Landing pages profissionais</h3>
+          <p>Páginas de alta conversão, pensadas para transformar visitantes em clientes reais.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E6CF6"
+              stroke-width="2">
+              <path d="M6 2 3 7v13a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V7l-3-5z" />
+              <path d="M3 7h18M9 11a3 3 0 0 0 6 0" />
+            </svg></div>
+          <h3>Sites para lojas e comércios</h3>
+          <p>Catálogo online, contato facilitado e uma vitrine digital que funciona 24 horas por dia.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E6CF6"
+              stroke-width="2">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m21 21-4.3-4.3" />
+            </svg></div>
+          <h3>Páginas para divulgação de serviços</h3>
+          <p>Destaque o que você oferece com clareza, agenda de contato e prova social.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E6CF6"
+              stroke-width="2">
+              <path d="M21 12a9 9 0 1 1-3-6.7" />
+              <path d="M21 3v6h-6" />
+            </svg></div>
+          <h3>Redesign de sites existentes</h3>
+          <p>Modernizamos sites ultrapassados com novo design, performance e responsividade.</p>
+        </div>
+        <div class="service-card reveal">
+          <div class="icon-box"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2E6CF6"
+              stroke-width="2">
+              <rect x="4" y="4" width="16" height="16" rx="2" />
+              <path d="M4 9h16" />
+            </svg></div>
+          <h3>Manutenção e suporte</h3>
+          <p>Acompanhamento contínuo para seu site estar sempre atualizado e no ar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="adv-section reveal">
+        <div class="section-head" style="max-width:600px;">
+          <p class="eyebrow" style="color:#8FB3FF;">Vantagens</p>
+          <h2 style="color:#fff;">Por que escolher a CODEFY?</h2>
+        </div>
+        <div class="adv-grid">
+          <div class="adv-item">
+            <div class="num">01</div>
+            <div>
+              <h4>Design exclusivo</h4>
+              <p>Nada de templates repetidos — cada site é desenhado para a sua marca.</p>
+            </div>
+          </div>
+          <div class="adv-item">
+            <div class="num">02</div>
+            <div>
+              <h4>Otimizado para celular</h4>
+              <p>Experiência perfeita em qualquer tamanho de tela.</p>
+            </div>
+          </div>
+          <div class="adv-item">
+            <div class="num">03</div>
+            <div>
+              <h4>Carregamento rápido</h4>
+              <p>Performance pensada desde o primeiro código.</p>
+            </div>
+          </div>
+          <div class="adv-item">
+            <div class="num">04</div>
+            <div>
+              <h4>Navegação intuitiva</h4>
+              <p>Seu cliente encontra o que precisa em poucos cliques.</p>
+            </div>
+          </div>
+          <div class="adv-item">
+            <div class="num">05</div>
+            <div>
+              <h4>Atendimento personalizado</h4>
+              <p>Acompanhamos cada etapa do seu projeto de perto.</p>
+            </div>
+          </div>
+          <div class="adv-item">
+            <div class="num">06</div>
+            <div>
+              <h4>Presença digital forte</h4>
+              <p>Sites construídos para gerar resultado, não só aparência.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="orcamento">
+    <div class="wrap">
+      <div class="cta-final reveal">
+        <h2>Está pronto para levar seu negócio para outro nível?</h2>
+        <p>Vamos transformar sua ideia em um site profissional.</p>
+        <a href="https://wa.me/557996086177?text=Ol%C3%A1!%20Gostaria%20de%20come%C3%A7ar%20um%20projeto%20de%20site."
+          target="_blank" rel="noopener" class="btn btn-primary">Começar meu projeto</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <div class="foot-logo">CODE<span>FY</span></div>
+          <p style="font-size:14px; max-width:280px;">Agência especializada na criação de sites profissionais para
+            empresas, comércios e empreendedores que querem crescer online.</p>
+        </div>
+        <div>
+          <h5>Navegação</h5>
+          <ul>
+            <li><a href="#servicos">Serviços</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Serviços</h5>
+          <ul>
+            <li><a href="#servicos">Sites institucionais</a></li>
+            <li><a href="#servicos">Landing pages</a></li>
+            <li><a href="#servicos">Lojas e comércios</a></li>
+            <li><a href="#servicos">Redesign de sites</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Contato</h5>
+          <ul>
+            <li><a href="mailto:contato@codefy.com.br">contato@codefy.com.br</a></li>
+            <li><a href="https://wa.me/557996086177" target="_blank" rel="noopener">(79) 9608-6177 (WhatsApp)</a></li>
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">LinkedIn</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© 2026 CODEFY. Todos os direitos reservados.</span>
+        <span>Site de demonstração criado como exemplo comercial.</span>
+      </div>
+    </div>
+  </footer>
+
+  <a class="wa-float"
+    href="https://wa.me/557996086177?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20sites%20da%20CODEFY."
+    target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24" fill="#fff">
+      <path
+        d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.97L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.2h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 1.67c2.22 0 4.3.87 5.87 2.44a8.26 8.26 0 0 1 2.43 5.8c0 4.55-3.7 8.25-8.3 8.25a8.3 8.3 0 0 1-4.23-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.39c0-4.55 3.7-8.24 8.28-8.24zm-4.58 4.7c-.17 0-.45.06-.68.32-.23.26-.9.87-.9 2.13s.92 2.47 1.05 2.64c.13.17 1.8 2.86 4.45 3.9 2.2.86 2.65.69 3.13.65.48-.04 1.54-.63 1.76-1.24.22-.6.22-1.12.15-1.23-.07-.1-.24-.17-.5-.3-.26-.13-1.54-.76-1.78-.85-.24-.09-.41-.13-.59.13-.17.26-.67.84-.82 1.02-.15.17-.3.19-.56.07-.26-.13-1.09-.4-2.07-1.28-.77-.68-1.28-1.53-1.44-1.79-.15-.26-.02-.4.11-.53.12-.12.26-.3.39-.45.13-.15.17-.26.26-.43.09-.17.04-.32-.02-.45-.07-.13-.59-1.46-.82-2-.22-.52-.44-.46-.6-.47-.15-.01-.33-.01-.5-.01z" />
+    </svg>
+  </a>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const btn = document.getElementById('themeToggle');
+      const btnMobile = document.getElementById('themeToggleMobile');
+      function getStored() { try { return localStorage.getItem('codefy-theme'); } catch (e) { return null; } }
+      function setStored(v) { try { localStorage.setItem('codefy-theme', v); } catch (e) { } }
+      function isDarkNow() {
+        const stored = root.getAttribute('data-theme');
+        if (stored === 'dark') return true;
+        if (stored === 'light') return false;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+      function updateIcons() {
+        const icon = isDarkNow() ? '☀️' : '🌙';
+        if (btn) btn.textContent = icon;
+        if (btnMobile) btnMobile.textContent = icon;
+      }
+      const stored = getStored();
+      if (stored === 'dark' || stored === 'light') { root.setAttribute('data-theme', stored); }
+      updateIcons();
+      function toggleTheme() {
+        const next = isDarkNow() ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        setStored(next);
+        updateIcons();
+      }
+      if (btn) btn.addEventListener('click', toggleTheme);
+      if (btnMobile) btnMobile.addEventListener('click', toggleTheme);
+    })();
+
+    const burger = document.getElementById('burgerBtn');
+    const menu = document.getElementById('mobileMenu');
+    burger.addEventListener('click', () => menu.classList.toggle('open'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.remove('open')));
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: .15 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+
+</html>
